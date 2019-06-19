@@ -1,0 +1,31 @@
+/** List definition. */
+class List {
+   field int x, y;		// data
+   field List next;		// reference to the next element
+
+   /** Creates a List. */
+   constructor List new(int Ax, int Ay) {
+   	let x = Ax;
+   	let y = Ay;
+   	let next = null;
+   	return this;
+   }
+
+   /** Getters. */
+   method int getX() 	{ return x; }
+   method int getY() 	{ return y; }
+   method int getNext() { return next; }
+   
+   /** Setters. */
+   method void setNext(List n) { let next = n; return; }  
+
+   /** Disposes this List by recursively disposing its tail. */
+	method void dispose() {
+   	if (~(next = null)) {
+			do next.dispose();
+		}
+		// Uses an OS routine to recycle this object.
+		do Memory.deAlloc(this);
+		return;
+	}	
+}

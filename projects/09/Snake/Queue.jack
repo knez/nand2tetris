@@ -1,0 +1,58 @@
+/** Queue container. */
+class Queue {
+   field int size;			// number of elements in a queue
+   field List tail;			// keeps track of the last element
+   field List head;			// reference to the first element
+ 
+   /** Creates a Queue. */
+   constructor Queue new(int x, int y) {
+		let head = List.new(x, y);
+   	let size = 1;
+   	let tail = head; 		// ouroboros
+   	return this;
+   }
+
+   /** Accessors. */
+	method int size() { return size; }
+   
+   /** Pushes a new element at the end. */
+	method void push(int x, int y) {
+		var List newElem;
+		let newElem = List.new(x, y);
+		do tail.setNext(newElem);
+		let tail = newElem;
+		let size = size + 1;
+		return;
+	}
+     
+   /** Pops an element at the front. */
+   method List pop() {
+		var List nextElem, retElem;
+		let nextElem = head.getNext();
+		let retElem = List.new(head.getX(), head.getY());
+		do Memory.deAlloc(head);
+		let head = nextElem;
+		let size = size - 1;
+		return retElem;
+	}
+   
+   /** Searches for data inside a Queue. */
+   method boolean contains(int x, int y) {
+		var List current;
+		let current = head;
+		while (~(current = null)) {
+			if ((current.getX() = x) & (current.getY() = y)) {
+				return true;
+			}
+			let current = current.getNext();
+		}
+		return false;
+	}
+   
+   /** Disposes this Queue. */
+	method void dispose() {
+		do head.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}	
+}

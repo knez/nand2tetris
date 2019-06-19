@@ -1,0 +1,70 @@
+/**
+ * Implements a simple snake game.
+ * This game allows the user to control a snake which grows in length
+ * as the game progresses, by chasing and eating the fruit.  
+ * When the game starts, a square of 16 by 16 pixels is shown at the
+ * top-left corner of the screen. The user controls the snake as follows.
+ * The 4 arrow keys are used to move the snake up, down, left, and right.
+ * The 'q' key is used to quit the game.
+ */
+
+class SnakeGame {
+   field Snake snake;
+   field Fruit fruit;
+   field int score, scoreInc;
+
+   /** Constructs a new Snake Game. */
+   constructor SnakeGame new() {
+      // Creates a 16 by 16 pixels snake
+      let snake = Snake.new(0, 0, 16);
+      let fruit = Fruit.new(128, 128, 16);
+      let score = 0;
+		let scoreInc = 50;
+      return this;
+   }
+   
+   /** Runs the game: main game logic */
+   method void run() {
+      var char key;  // the currently pressed key
+      var boolean exit;
+      let exit = false;
+
+      while (~exit) {			
+         // waits for a key to be pressed
+         let key = Keyboard.keyPressed();
+			// move snake one square
+         do snake.move();
+         if (~(snake.crashed()) & ~((key = 81)) ) {	// q key
+				// change direction if arrow keys pressed         
+				if ((key > 129) & (key < 134)) {
+					do snake.setDirection(key - 129);
+				}			
+				if (snake.crashesWith(fruit)) {
+					if (score = 0) { do Random.seed(scoreInc); }
+					let score = score + Math.max(5, scoreInc);
+					let scoreInc = 50;
+					do snake.incrementLength();
+					do fruit.place();
+				}
+				let scoreInc = scoreInc - 1;
+				do snake.draw();		// draw snake
+				do Sys.wait(150);  	// delay the next movement
+			} 
+			else {
+				let exit = true;
+			}
+	   }
+	   
+	   do Output.moveCursor(11, 26); 	// center score
+	   do Output.printString("SCORE: ");
+	   do Output.printInt(score);
+		return;
+	}
+
+   /** Disposes this game. */
+   method void dispose() {
+      do snake.dispose();
+      do Memory.deAlloc(this);
+      return;
+   }	
+}

@@ -1,0 +1,27 @@
+CHIP Decode {
+
+    IN  in[16],
+    	zr,
+    	ng;
+    	
+    OUT a, m, d, pcl;
+ 
+    PARTS:
+ 	
+ 		// AMD load bits
+ 		Not(in=in[15], out=notop); 
+ 		Or(a=notop, b=in[5], out=a);
+ 		And(a=in[15], b=in[3], out=m);
+ 		And(a=in[15], b=in[4], out=d);
+ 		
+ 		// PC logic
+ 		Not(in=ng, out=gt);
+ 		Not(in=zr, out=notzr);
+ 		And(a=in[0], b=gt, out=j0);
+ 		And(a=j0, b=notzr, out=j1);
+ 		And(a=in[1], b=zr, out=j2);
+ 		And(a=in[2], b=ng, out=j3);
+ 		Or(a=j1, b=j2, out=j12);
+ 		Or(a=j12, b=j3, out=j123);
+ 		And(a=in[15], b=j123, out=pcl);
+ }

@@ -1,0 +1,18 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/02/Inc16.hdl
+
+/**
+ * 16-bit Zero/Negate:
+ */
+
+CHIP ZN16 {
+    IN in[16], z, n;
+    OUT out[16];
+
+    PARTS:
+    Mux16(a=in, b=false, sel=z, out=o1);
+    Not16(in=o1, out=o2);
+    Mux16(a=o1, b=o2, sel=n, out=out);
+}

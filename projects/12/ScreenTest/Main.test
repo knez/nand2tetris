@@ -1,0 +1,25 @@
+// This file is part of www.nand2tetris.org
+// and the book "The Elements of Computing Systems"
+// by Nisan and Schocken, MIT Press.
+// File name: projects/12/ScreenTest/Main.jack
+
+/** Test program for the OS Screen class. */
+class Main {
+
+    /** Draws a sample pictue on the screen using lines and circles. */
+    function void main() {
+		
+      //do Screen.drawRectangle(280,90,410,220);  // house
+      
+      //do Screen.drawLine(30, 100, 100, 50);
+      
+      do Screen.drawCircle(120, 120, 40);
+      
+      //do Screen.drawLine(120, 100, 120, 50);
+
+	//	do Screen.drawLine(0, 0, 15, 0);
+	//	do Screen.drawLine(16, 1, 31, 1);
+     // do Screen.drawLine(0, 0, 511, 0);
+      return;
+    }
+}

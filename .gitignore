@@ -1,0 +1,12 @@
+# object files
+*.o
+
+# output files
+*.out
+
+# binaries
+**/HackAssembler/HackAssembler
+**/VMTranslator/VMTranslator
+**/JackAnalyzer/JackAnalyzer
+**/JackCompiler/JackCompiler
+

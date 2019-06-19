@@ -1,0 +1,4 @@
+function Keyboard.keyPressed 0
+push constant 24576
+call Memory.peek 1
+return

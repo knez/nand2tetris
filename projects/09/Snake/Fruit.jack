@@ -1,0 +1,43 @@
+class Fruit {
+	field int x, y, size;
+	
+	/** Constructs fruit and places it on a random location. */
+	constructor Fruit new (int Ax, int Ay, int Asize) {
+		let x = Ax;
+		let y = Ay;
+		let size = Asize;
+		do draw();
+		return this;
+	}
+
+	/** Getters. */
+	method int getX() { return x; }
+	method int getY() { return y; }
+		
+	/** Places a fruit on a new random location. */
+	method void place() { 
+		let x = Random.between(0, 32);
+		let y = Random.between(0, 16);
+		while (Memory.peek((x/16)+(y*32)+16384)) {
+			let x = Random.between(0, 32);
+			let y = Random.between(0, 16);
+		}
+		do draw();
+		return;
+	}
+
+	/** Draws fruit. */
+	method void draw() {
+		do Screen.setColor(true);
+		do Screen.drawRectangle(x, y, x + size - 1, y + size - 1);
+		do Screen.setColor(false);
+		do Screen.drawRectangle(x + 3, y + 3, x + size - 4, y + size - 4);
+		return;
+	}
+
+	/** Disposes this fruit. */
+	method void dispose() { 
+		do Memory.deAlloc(this);
+		return;
+	}
+}

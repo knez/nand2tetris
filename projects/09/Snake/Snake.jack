@@ -1,0 +1,76 @@
+class Snake {
+	field int x, y;
+	field int direction;
+	field int length, size;
+	field Queue elements;
+	
+	/** Constructs snake. */
+	constructor Snake new(int Ax, int Ay, int Asize) {
+		let x = Ax;
+		let y = Ay;
+		let direction = 3;	// right
+		let length = 1;
+		let size = Asize;
+		let elements = Queue.new(x, y);
+		do paintSquare(true, x, y);
+		return this;
+	}
+			
+	/** Setters. */
+	method void incrementLength()	{ let length = length + 1; return; } 
+	
+	/** Set only correct direction. */
+	method void setDirection(int d) { 
+		if (~(Math.mod(d,2) = Math.mod(direction, 2))) {
+			let direction = d;
+		}
+		return; 
+	}		
+	
+	/** Draw or clear one snake's element. */
+	method void paintSquare(boolean color, int x, int y) {
+		do Screen.setColor(color);
+		do Screen.drawRectangle(x, y, x + size - 1, y + size - 1);
+		return;			
+	}
+
+	/** Draw newly positioned head and clear tail. */
+	method void draw() {
+		var List tail;
+		do elements.push(x, y);
+		if (length < elements.size()) {
+			let tail = elements.pop();
+			do paintSquare(false, tail.getX(), tail.getY());
+		}
+		do paintSquare(true, x, y);				
+		return;
+	}
+	
+	/** Returns true if fruit eaten. */
+	method boolean crashesWith(Fruit f) {
+		return ((x = f.getX()) & (y = f.getY()));
+	}
+
+	/** Returns true if not within boundaries or crashed into itself. */
+	method boolean crashed() { 
+		return ((x < 0) | (x > 511) | (y < 0) | (y > 255) 
+									  | elements.contains(x, y));
+	}
+
+   /** Moves the snake in the current direction. */
+	method void move() {
+		// 1 - LEFT, 2 - DOWN, 3 - RIGHT, 4 - UP
+		if (direction = 1) { let x = x - size; }
+		if (direction = 2) { let y = y - size; }
+		if (direction = 3) { let x = x + size; }
+		if (direction = 4) { let y = y + size; }
+		return;
+	}
+	
+	/** Disposes snake's body and itself. */
+	method void dispose() {
+		do elements.dispose();
+		do Memory.deAlloc(this);
+		return;
+	}
+}
