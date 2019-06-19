@@ -1,0 +1,4 @@
+projects/**/*.tst linguist-vendored
+tools/**/*.sh linguist-vendored
+tools/**/*.bat linguist-vendored
+*.html linguist-vendored
