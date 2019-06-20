@@ -2,10 +2,10 @@
 
 <img width="60%" height="60%" src="projects/09/Snake/snake.gif">
 
-All project solutions for https://nand2tetris.org
+All projects for https://nand2tetris.org
 
 The goal of this course is to design and build a general purpose computer
-from the bottom up. First half deals with low level things (from NAND gates to Assembler),
+from the bottom up. First half of the course deals with low-level things (from NAND gates to Assembler),
 while the second half focuses on a software layer (Compiler, OS, high-level programming)
 
 ## Course syllabus
