@@ -13,14 +13,14 @@ bool Parser::hasMoreCommands()
 
 void Parser::advance()
 {
-	getline ( input, cmd, '\n' );
+	getline ( input, cmd, '\r' );
 	// consume new line character
-	//input.ignore();
+	input.ignore();
 	
 	while ( cmd.empty() || cmd.at(0) == '/' )
 	{
-		getline ( input, cmd, '\n' );
-		//input.ignore();		
+		getline ( input, cmd, '\r' );
+		input.ignore();		
 	}
 	// remove inline comments
 	if ( std::size_t pos = cmd.find ( '/' ) )
