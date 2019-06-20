@@ -1,7 +1,5 @@
 # Nand to Tetris
 
-<img width="60%" height="60%" src="projects/09/Snake/snake.gif">
-
 All projects for https://nand2tetris.org
 
 The goal of this course is to design and build a general purpose computer
